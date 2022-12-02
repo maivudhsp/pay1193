@@ -19,6 +19,15 @@
     </PackageReference>
   </ItemGroup>
 
+	<ItemGroup>
+		<!--<None Update="WkHtmlToPdf\wkhtmltoimage.exe">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>-->
+		<None Update="WkHtmlToPdf\wkhtmltopdf.exe">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\Pay1193.Entity\Pay1193.Entity.csproj" />
     <ProjectReference Include="..\Pay1193.Persistence\Pay1193.Persistence.csproj" />

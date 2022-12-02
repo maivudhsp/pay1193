@@ -80,7 +80,6 @@ namespace Pay1193.Persistence.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalInsuranceNo")
@@ -124,35 +123,42 @@ namespace Pay1193.Persistence.Migrations
                     b.Property<decimal>("ContractualHours")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("DatePay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("EarningDeduction")
-                        .HasColumnType("money");
-
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("HourWorked")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("HourlyRate")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("HoursWorked")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("MonthPay")
-                        .HasColumnType("datetime2");
+                    b.Property<decimal>("NIC")
+                        .HasColumnType("money");
 
                     b.Property<decimal>("NetPayment")
                         .HasColumnType("money");
 
-                    b.Property<decimal>("NiC")
-                        .HasColumnType("money");
+                    b.Property<string>("NiNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("OvertimeEarnings")
                         .HasColumnType("money");
 
                     b.Property<decimal>("OvertimeHours")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PayDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PayMonth")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("SLC")
                         .HasColumnType("money");
@@ -167,10 +173,13 @@ namespace Pay1193.Persistence.Migrations
                     b.Property<int>("TaxYearId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("TotalDeduction")
+                        .HasColumnType("money");
+
                     b.Property<decimal>("TotalEarnings")
                         .HasColumnType("money");
 
-                    b.Property<decimal>("UnionFee")
+                    b.Property<decimal?>("UnionFee")
                         .HasColumnType("money");
 
                     b.HasKey("Id");

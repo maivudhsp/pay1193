@@ -1,4 +1,5 @@
-﻿using Pay1193.Entity;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Pay1193.Entity;
 using Pay1193.Persistence;
 using System;
 using System.Collections.Generic;
@@ -31,24 +32,25 @@ namespace Pay1193.Services.Implement
             return contractualEarnings;
         }
 
-        public Task CreateAsync(PaymentRecord paymentRecord)
+        public async Task CreateAsync(PaymentRecord paymentRecord)
         {
-            throw new NotImplementedException();
+            await _context.PaymentRecords.AddAsync(paymentRecord);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<PaymentRecord> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.PaymentRecords.OrderBy(p => p.EmployeeId).ToList();
         }
 
         public PaymentRecord GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.PaymentRecords.Where(pay => pay.Id == id).FirstOrDefault();
         }
 
         public TaxYear GetTaxYearById(int id)
         {
-            throw new NotImplementedException();
+            return _context.TaxYears.Where(year => year.Id == id).FirstOrDefault();
         }
 
         public decimal NetPay(decimal totalEarnings, decimal totalDeduction)
@@ -82,6 +84,20 @@ namespace Pay1193.Services.Implement
         public decimal TotalDeduction(decimal tax, decimal nic, decimal studentLoanRepayment, decimal unionFees)
         {
             return tax + nic + studentLoanRepayment + unionFees;
+        }
+
+        public decimal TotalEarnings(decimal overtimeEarnings, decimal contractualEarnings) 
+            => overtimeEarnings + contractualEarnings;
+
+
+        public IEnumerable<SelectListItem> GetAllTaxYear()
+        {
+            var allTaxYear = _context.TaxYears.Select(y => new SelectListItem
+            {
+                Text = y.YearOfTax,
+                Value = y.Id.ToString()
+            });
+            return allTaxYear;
         }
     }
 }
